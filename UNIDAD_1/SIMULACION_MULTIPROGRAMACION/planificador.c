@@ -36,6 +36,23 @@ void verificar(int reloj_time, proceso arreglo[],int num_pro){
     	}
 	}
 }
+//verificar que todos ahn terminado
+int verificar_todos_finalizado(proceso arreglo[],int num_pro){
+	int i=0,v=0;
+	for(i=0;i<num_pro;i++){
+		if(arreglo[i].estatus=='T'){
+			v++;
+    	}
+	}
+	if(v==num_pro){
+		return 1;
+	}else{
+		return -1;
+	}
+}
+
+
+
 int main(int argc, char const *argv[])
 {
 	int pdi;
@@ -88,21 +105,23 @@ int main(int argc, char const *argv[])
 	proceso p_uso;
 	//printf("xdxd%i",p_uso.pdi);
 	if(num_pro!=0){
-		while(cola[num_pro-1].estatus!='T'){
+		while(verificar_todos_finalizado(cola,num_pro)==-1){
 			verificar(reloj,cola,num_pro);
+			//printf("\n");
 			//imprimir();
 			if(contar()!=0&&cont-1==0){	
 				p_uso=extraer();
-				printf("\n\nEJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
-				Sleep(2000);
-				cont++;
-			}else if(p_uso.estatus!='\0'){
+				//printf("\n\nEJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
+				//Sleep(2000);
+				//cont++;
+			}
+			if(p_uso.estatus!='\0'){
 				if(p_uso.tim_uso>quantum){
 					if(cont==quantum){
-						printf("\nFINAL EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i\n",p_uso.pdi,reloj,reloj+1);
+						printf("\nMAYOR FINAL EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i\n",p_uso.pdi,reloj,reloj+1);
 						p_uso.tim_uso-=cont;
-						p_uso.estatus='E';
-						asignar_es(num_pro,cola,p_uso.pdi,'E');
+						p_uso.estatus='S';
+						asignar_es(num_pro,cola,p_uso.pdi,'S');
 						insertar(p_uso);
 						cont=1;
 						p_uso.estatus='\0';
@@ -113,15 +132,25 @@ int main(int argc, char const *argv[])
 							printf("\nESTATUS = %c",cola[i].estatus);
 							printf("\n\n\n");
 						}*/
-					}else {
-						printf("\nEN EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
+					}
+					/*//validacion cuando es un Q de 1
+					else if(cont > quantum){
+						p_uso.tim_uso-=cont-1;
+						p_uso.estatus='E';
+						asignar_es(num_pro,cola,p_uso.pdi,'E');
+						insertar(p_uso);
+						cont=1;
+						p_uso.estatus='\0';
+					}*/
+					else{
+						printf("\nMAYOR EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
 						asignar_es(num_pro,cola,p_uso.pdi,'E');
 						Sleep(2000);
 						cont++;
 					}
 				}else if(p_uso.tim_uso<=quantum){
 					if(cont==p_uso.tim_uso){
-						printf("\nMENOR t EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i\n",p_uso.pdi,reloj,reloj+1);
+						printf("\nMENOR FINAL EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i\n",p_uso.pdi,reloj,reloj+1);
 						p_uso.tim_uso-=cont;
 						p_uso.estatus='T';
 						asignar_es(num_pro,cola,p_uso.pdi,'T');
@@ -134,8 +163,16 @@ int main(int argc, char const *argv[])
 							printf("\nESTATUS = %c",cola[i].estatus);
 							printf("\n\n\n");
 						}*/
-					}else {
-						printf("\n MENOR EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
+					}
+					/*//validacion cuando es un Q de 1
+					else if(cont > quantum){
+						p_uso.tim_uso-=cont-1;
+						p_uso.estatus='T';
+						asignar_es(num_pro,cola,p_uso.pdi,'T');
+						cont=1;
+						p_uso.estatus='\0';
+					}*/else {
+						printf("\nMENOR EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
 						asignar_es(num_pro,cola,p_uso.pdi,'E');
 						Sleep(2000);
 						cont++;
@@ -155,8 +192,8 @@ int main(int argc, char const *argv[])
 		printf("\nNO SE ENCONTRARON PROCESOS.");
 		
 	}
-	
-	
+	printf("\n");
+	//imprimir();
 	
 	//-------------------------------------------
 	//imprimir datos

@@ -65,7 +65,7 @@ void imprimir()
     printf("Listado de todos los elementos de la cola.\n");
     while (reco != NULL)
     {
-        printf("%i - ", reco->info.llegada);
+        printf("%i - ", reco->info.pdi);
         reco = reco->sig;
     }
     printf("\n");
