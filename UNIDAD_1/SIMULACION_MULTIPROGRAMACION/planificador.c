@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <windows.h>
+//#include <windows.h>
 //#include "proceso.h"
 #include "cola.h"
 /*typedef struct proceso
@@ -68,7 +68,7 @@ int main(int argc, char const *argv[])
 	scanf("%i",&num_pro);
 	fflush(stdin);
 	proceso cola[num_pro];
-	printf("INGRESA EL VALOR DEL QUANTUM %i: ",i++);
+	printf("INGRESA EL VALOR DEL QUANTUM: ");
 	scanf("%i",&quantum);
 	fflush(stdin);
 	for(i=0;i<num_pro;i++){
@@ -125,6 +125,7 @@ int main(int argc, char const *argv[])
 						insertar(p_uso);
 						cont=1;
 						p_uso.estatus='\0';
+						sleep(2);
 						/*for(i=0;i<num_pro;i++){
 							printf("\n\nPDI= %i",cola[i].pdi);
 							printf("\nTIEMPO DE USO= %i",cola[i].tim_uso);		
@@ -145,7 +146,7 @@ int main(int argc, char const *argv[])
 					else{
 						printf("\nMAYOR EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
 						asignar_es(num_pro,cola,p_uso.pdi,'E');
-						Sleep(2000);
+						sleep(2);
 						cont++;
 					}
 				}else if(p_uso.tim_uso<=quantum){
@@ -156,6 +157,7 @@ int main(int argc, char const *argv[])
 						asignar_es(num_pro,cola,p_uso.pdi,'T');
 						cont=1;
 						p_uso.estatus='\0';
+						sleep(2);
 						/*for(i=0;i<num_pro;i++){
 							printf("\n\nPDI= %i",cola[i].pdi);
 							printf("\nTIEMPO DE USO= %i",cola[i].tim_uso);		
@@ -174,14 +176,14 @@ int main(int argc, char const *argv[])
 					}*/else {
 						printf("\nMENOR EJECUTANDO EL PROCESO %i EN EL LAPSO DE TIEMPO %i-%i",p_uso.pdi,reloj,reloj+1);
 						asignar_es(num_pro,cola,p_uso.pdi,'E');
-						Sleep(2000);
+						sleep(2);
 						cont++;
 					}					
 				}
 			}else
 			{
 				printf("\nEN ESPERA DE NUEVO PROCESO ...");
-				Sleep(2000);
+				sleep(2);
 			}
 			/*if(cola[0].tim_uso<=quantum){
 				if()
