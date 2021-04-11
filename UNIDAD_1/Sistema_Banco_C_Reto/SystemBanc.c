@@ -1,3 +1,6 @@
+/*programa aun no 
+concluidos --aun un con problemas al guardar cambios*/
+
 #include <stdio.h>
 #include "Banco.h"
 #include "EntradaDatos.h"
