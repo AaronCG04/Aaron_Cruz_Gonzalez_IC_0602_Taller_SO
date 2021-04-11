@@ -314,9 +314,10 @@ int main(int argc, char const *argv[])
                     	fflush(stdin);
                     	
                         double sueldo=doble("Introduce el Sueldo: ");
-                        printf("dfsdfsd--");
+                        //printf("dfsdfsd--");
                         Cliente temp = crear_cliente(clientenom,sexo2,sueldo);
-                        printf("dfsdfsd---");
+                        //printf("dfsdfsd---");
+                        //printf("%i-%s-%c-%lf-%i",id_pais,clientenom,sexo2,sueldo,cliente);
                         banco[id_pais].clientes=setEspecificoCliente(banco[id_pais],cliente, temp);
                         //banco[id_pais].clientes[cliente]=setEspecificoCliente(banco[id_pais],cliente, temp);
                     }

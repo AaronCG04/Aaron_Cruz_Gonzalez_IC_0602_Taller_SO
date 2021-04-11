@@ -23,7 +23,7 @@ Banco crear_banco(char nombrePais[], int tam_cliente){
 	ban.clientes= (Cliente *)malloc (tam_cliente*sizeof(ban.clientes));
 	//construirClientes(ban,tam_cliente);
 	ban.clientes=construirClientes(ban,tam_cliente);
-    imprimirEspecifico(ban,tam_cliente-1);
+    //imprimirEspecifico(ban,tam_cliente-1);
 	return ban;
 }
 Cliente* construirClientes(Banco ban ,int tam_cliente){
@@ -160,7 +160,7 @@ Cliente getEspecificoCliente(Banco ban,int index){
     return ban.clientes[index];
 }
 
-Cliente setEspecificoCliente(Banco ban,int index, Cliente cliente){
+Cliente* setEspecificoCliente(Banco ban,int index, Cliente cliente){
         //this.clientes[index] = cliente;
    	/*
 	   int i;
@@ -170,17 +170,18 @@ Cliente setEspecificoCliente(Banco ban,int index, Cliente cliente){
         c[i] = crear_cliente(nombre,'\0',0.0);
     }
     return c;*/
-    /*Cliente *c=ban.clientes;
-    printf("Si entre entre aqui \n"); 
+    Cliente *c=ban.clientes;
+    int i;
+    //printf("Si entre entre aqui \n"); 
 	for(i = 0; i <ban.tam_clientes; i++){
     	
 		if(i==index){
     		c[i]=setTodosDatos(c[index],cliente);
 		}
     }	
-    printf("Si entre entre aqui -\n");*/
-    //return c;
-    return setTodosDatos(ban.clientes[index],cliente);
+    //printf("Si entre entre aqui -\n");
+    return c;
+    //return setTodosDatos(ban.clientes[index],cliente);
 }
 
 char* getNombreCliente(Banco ban,int index){

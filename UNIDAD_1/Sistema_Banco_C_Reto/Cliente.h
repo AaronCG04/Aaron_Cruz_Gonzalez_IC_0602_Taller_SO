@@ -33,13 +33,13 @@ Cliente crear_cliente(char nombre[],char sexo, double saldo){
 }
 //cuando recibe como parametro un cliente
 Cliente setTodosDatos(Cliente origen,Cliente cliente){
-        printf("Si entre entre aqui --\n");
+        //printf("Si entre entre aqui --\n");
         strcpy(origen.nombre,cliente.nombre);
         origen.sexo=validarSexo(cliente.sexo);
         origen.saldo=validarSaldo(cliente.saldo);
         //origen.ocupado=true;
         origen.ocupado=setOcupado(origen);
-        printf("Si entre entre aqui ---\n");
+        //printf("Si entre entre aqui ---\n");
         return origen;
 }
 
