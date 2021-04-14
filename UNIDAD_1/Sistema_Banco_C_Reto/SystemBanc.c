@@ -70,7 +70,7 @@ void introducirPaises(Banco banco[],int num_b){
         //printf("entro\n");
         //strcpy(snum,num);
 		char mensaje[50] = "Introduce el nombre del Pais ";		
-		itoa(i, snum, 10);
+		sprintf(snum,"%d",i);
 		strcat(mensaje, snum);
 		strcat(mensaje,": ");
         char pais[30];
