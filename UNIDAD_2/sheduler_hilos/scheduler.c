@@ -4,6 +4,8 @@ static int buscarIndex_empty(array_procesos *_array);
 static void initArray(array_procesos *_array);
 static bool isOk_ID_Process(array_procesos *_array, process _t);
 
+int cont_procesos=0;
+
 process *crear_Proceso(int _id, int _delay, char *_nombreProceso, FN_ACCION _proceso_realizar, int _estado){
 	process *_p = (process *)malloc(sizeof(process));
 	_p->id = _id;

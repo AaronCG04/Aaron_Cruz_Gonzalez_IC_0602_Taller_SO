@@ -20,7 +20,7 @@
 #define ACTIVO 					1
 #define NO_ACTIVO				0
 
-int cont_procesos;
+extern int cont_procesos;
 
 typedef struct PROCESS process;
 typedef struct ARRAY_PROCESS array_procesos;
