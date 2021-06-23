@@ -28,7 +28,7 @@ int iniciar_socket_puerto(int puerto){
 
 	if (listen(crear_sokcet,3)<0)
 	{
-		perror("listen");
+		perror("Error en la Escucha");
 		exit(EXIT_FAILURE);
 	}else{
 		printf("Servidor al eschuca en el puerto %d\n",ntohs(servidor.sin_port) );
@@ -40,7 +40,7 @@ int aceptar(int crear_sokcet){
 	int aceptado;
 	if ((aceptado=accept(crear_sokcet,(struct sockaddr*)&servidor,(socklen_t*)&socketlen))<0)
 	{
-		perror("accept");
+		perror("Error de Aceptacion");
 		exit(EXIT_FAILURE);
 	}
 	return aceptado;
@@ -56,15 +56,15 @@ char* leer(int aceptado,int tam){
 	char buffer[tam],*buffer1;
 	bzero((char*)&buffer,sizeof(buffer));
 	read(aceptado,buffer,tam);
-	printf("-->>>%s\n",buffer);
+	//printf("-->>>%s\n",buffer);
 	buffer1=buffer;
 	return buffer1;
 }
 
 void enviar(int aceptado,char *texto){
-	printf("ffgfdfrgth\n");
+	//printf("ffgfdfrgth\n");
 	send(aceptado, texto , strlen(texto) , 0 );
-    printf("Hello message sent\n");
+    printf("Enviando Respuesta...\n");
 }
 
 char * hacer_suma(char *num1, char *num2){
@@ -169,7 +169,7 @@ char * hacer_suma(char *num1, char *num2){
 		}
 		free(respaldo);
 	}
-	//printf("%s\n",r);
+	printf("Resultado = %s\n",r);
 	return r;
 	//free(r);
 }

@@ -1,4 +1,0 @@
-all:
-	gcc -g -c -Wall principal.c -o principal.o
-	gcc -g -c -
-clear:

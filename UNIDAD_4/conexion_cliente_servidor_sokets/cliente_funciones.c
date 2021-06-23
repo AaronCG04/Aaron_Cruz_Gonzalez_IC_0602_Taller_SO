@@ -25,7 +25,7 @@ int conectar_cliente_servidor(char *ip,int puerto){
    
     if (connect(conexion, (struct sockaddr *)&cliente, sizeof(cliente)) < 0)
     {
-        printf("\nConnection Failed \n");
+        printf("\nConexion Fallida\n");
         exit(EXIT_FAILURE);
         //return -1;
     }
@@ -41,8 +41,9 @@ void enviar_datos(int conexion, char *numero){
 
 void recibir_datos(int conexion){
 	char buffer[1024];
+	bzero((char*)&buffer,sizeof(buffer));
 	read( conexion , buffer, 1024);
-	printf("Recibido %s\n",buffer);
+	printf("Resultado: %s\n",buffer);
 }
 
 char * optener_numero(){
@@ -54,28 +55,33 @@ char * optener_numero(){
 	char ca;
 	while(ca!='\n'){
 		scanf("%c",&ca);
-		
-		if(i<total_ca){
-			//printf("entro en el normal\n");
-			str_d[i]=ca;
+		if ((ca>=48 && ca<=57 )|| ca=='\n')
+		{
+			if(i<total_ca){
+				//printf("entro en el normal\n");
+				str_d[i]=ca;
+			}else{
+				r=(char *)malloc(sizeof(char)*total_ca);
+				for (j = 0; j <= total_ca; ++j)
+				{
+					r[j]=str_d[j];
+				}
+				//printf("hiso repaldo\n");
+				free(str_d);		
+				total_ca_an=total_ca;
+				total_ca=total_ca+10;
+				str_d=(char *)malloc(sizeof(char)*total_ca);
+				for (j = 0; j <= total_ca_an; ++j)
+				{
+					str_d[j]=r[j];
+				}
+				//printf("copia respaldo a orignal\n");
+				free(r);
+				str_d[i]=ca;
+			}
 		}else{
-			r=(char *)malloc(sizeof(char)*total_ca);
-			for (j = 0; j <= total_ca; ++j)
-			{
-				r[j]=str_d[j];
-			}
-			//printf("hiso repaldo\n");
-			free(str_d);		
-			total_ca_an=total_ca;
-			total_ca=total_ca+10;
-			str_d=(char *)malloc(sizeof(char)*total_ca);
-			for (j = 0; j <= total_ca_an; ++j)
-			{
-				str_d[j]=r[j];
-			}
-			//printf("copia respaldo a orignal\n");
-			free(r);
-			str_d[i]=ca;
+			printf("Se detecto un caracter..\n");
+			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
